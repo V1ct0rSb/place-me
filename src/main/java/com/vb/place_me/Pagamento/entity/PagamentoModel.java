@@ -2,13 +2,17 @@ package com.vb.place_me.Pagamento.entity;
 
 import java.math.BigDecimal;
 
+import org.springframework.context.annotation.EnableMBeanExport;
 import com.vb.place_me.Pagamento.enums.StatusPagamento;
+import com.vb.place_me.Reserva.entity.ReservaModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,4 +31,9 @@ public class PagamentoModel {
     private BigDecimal valor;
     @Column(name = "status", nullable = false)
     private StatusPagamento status;
+
+    @OneToOne
+    @JoinColumn(name = "reserva_id", referencedColumnName = "id")
+    private ReservaModel reserva;
+
 }

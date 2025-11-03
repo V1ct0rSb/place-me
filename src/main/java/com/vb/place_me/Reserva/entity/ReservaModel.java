@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vb.place_me.Pagamento.entity.PagamentoModel;
 import com.vb.place_me.Propriedade.entity.PropriedadeModel;
 import com.vb.place_me.Reserva.enums.StatusReserva;
 import com.vb.place_me.Usuario.entity.UsuarioModel;
@@ -18,6 +19,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -45,4 +47,9 @@ public class ReservaModel {
     @JoinColumn(name = "usuario_id")
     @JsonIgnore
     private UsuarioModel usuario;
+
+    @OneToOne
+    @JoinColumn(name = "pagamento_id")
+    private PagamentoModel pagamento;
+
 }
