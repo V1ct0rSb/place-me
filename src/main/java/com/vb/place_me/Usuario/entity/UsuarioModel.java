@@ -1,5 +1,10 @@
 package com.vb.place_me.Usuario.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.vb.place_me.Propriedade.entity.PropriedadeModel;
+import com.vb.place_me.Reserva.entity.ReservaModel;
 import com.vb.place_me.Usuario.enums.TipoUsuario;
 
 import jakarta.persistence.Column;
@@ -9,6 +14,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,4 +40,10 @@ public class UsuarioModel {
     private TipoUsuario tipo;
     @Column(name = "status", nullable = false)
     private Boolean status;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<PropriedadeModel> propriedades = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario")
+    private List<ReservaModel> reservas = new ArrayList<>();
 }
