@@ -3,6 +3,7 @@ package com.vb.place_me.Propriedade.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.vb.place_me.Propriedade.dto.PropriedadeCreateDTO;
 import com.vb.place_me.Propriedade.dto.PropriedadeResponseDTO;
 import com.vb.place_me.Propriedade.entity.PropriedadeModel;
@@ -19,6 +20,7 @@ public class PropriedadeService {
     private final PropriedadeMapper mapper;
 
     //POST
+    @Transactional
     public PropriedadeResponseDTO criarPropriedade(PropriedadeCreateDTO dto) {
 
         PropriedadeModel propriedade = mapper.toEntity(dto);
@@ -34,13 +36,15 @@ public class PropriedadeService {
 
 
     //GET/{ID}
-    public PropriedadeResponseDTO listarPropriedadePorId(Long id) {
+    @Transactional
+    public PropriedadeResponseDTO exibirPropriedadePorId(Long id) {
         PropriedadeModel propriedade = this.repository.findById(id)
             .orElseThrow(() -> new RuntimeException("Propriedade de id: " + id + " não encontrada!!"));
         return this.mapper.toResponse(propriedade);
     }
 
-    //PATH/{ID}
+    //PATCH/{ID}
+    @Transactional
     public PropriedadeResponseDTO editarPropriedade(PropriedadeCreateDTO dto, Long id) {
         PropriedadeModel propriedade = this.repository.findById(id)
             .orElseThrow(() -> new RuntimeException("Propriedade de id: " + id + " não encontrada!!"));
@@ -69,9 +73,9 @@ public class PropriedadeService {
     }
 
     //DELETE/{ID}
+    @Transactional
     public void deletarPropriedade(Long id) {
         this.repository.deleteById(id);
     }
-
 
 }
