@@ -2,6 +2,8 @@ package com.vb.place_me.Propriedade.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vb.place_me.Propriedade.enums.TipoPropriedade;
@@ -17,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -67,9 +70,8 @@ public class PropriedadeModel {
     @JsonIgnore
     private UsuarioModel usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "reserva_id")
+    @OneToMany(mappedBy = "propriedade")
     @JsonIgnore
-    private ReservaModel reserva;
+    private List<ReservaModel> reservas = new ArrayList<>();
 
 }
