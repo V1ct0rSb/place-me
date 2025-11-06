@@ -40,8 +40,10 @@ public class ReservaModel {
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
-    @OneToMany(mappedBy = "reserva")
-    List<PropriedadeModel> propriedades = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "propriedade_id")
+    @JsonIgnore
+    private PropriedadeModel propriedade;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
