@@ -2,6 +2,7 @@ package com.vb.place_me.Usuario.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.vb.place_me.Usuario.dto.UsuarioCreateDTO;
@@ -17,11 +18,13 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioService {
     private final UsuarioRepository repository;
     private final UsuarioMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
     //POST
     @Transactional
     public UsuarioResponseDTO criarUsuario(UsuarioCreateDTO dto) {
         var usuario = mapper.toEntity(dto);
+        usuario.setSenha(passwordEncoder.encode(dto.senha()));
         var usuarioSalvo = repository.save(usuario);
 
         return mapper.toResponse(usuarioSalvo);
