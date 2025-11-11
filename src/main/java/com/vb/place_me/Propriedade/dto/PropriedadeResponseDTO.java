@@ -8,6 +8,7 @@ import com.vb.place_me.Propriedade.enums.TipoPropriedade;
 public record PropriedadeResponseDTO(
     Long id,
     String titulo,
+    String descricao,
     TipoPropriedade tipo,
     BigDecimal precoPorNoite,
     Boolean ativo,

@@ -9,7 +9,6 @@ public record PropriedadeCreateDTO(
     String descricao,
     TipoPropriedade tipo,
     BigDecimal precoPorNoite,
-    Boolean ativo,
     String cep
 ) {
 

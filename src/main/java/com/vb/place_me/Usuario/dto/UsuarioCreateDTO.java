@@ -10,7 +10,7 @@ public record UsuarioCreateDTO(
     @NotBlank(message = "O nome é obrigatório!!")
     String nome,
     @NotBlank(message = "O email é obrigatório!!")
-    @Email(message = "O formato do email é invalido!1")
+    @Email(message = "O formato do email é invalido!!")
     String email,
     @NotBlank(message = "A senha é obrigatória!")
     String senha,

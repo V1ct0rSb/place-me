@@ -22,7 +22,6 @@ public class PropriedadeService {
     //POST
     @Transactional
     public PropriedadeResponseDTO criarPropriedade(PropriedadeCreateDTO dto) {
-
         PropriedadeModel propriedade = mapper.toEntity(dto);
         var propriedadeSalvo = this.repository.save(propriedade);
         return this.mapper.toResponse(propriedadeSalvo);
@@ -59,9 +58,6 @@ public class PropriedadeService {
         }
         if (dto.precoPorNoite() != null) {
             propriedade.setPrecoPorNoite(dto.precoPorNoite());
-        }
-        if (dto.ativo() != null) {
-            propriedade.setAtivo(dto.ativo());
         }
         if (dto.cep() != null) {
             propriedade.setCep(dto.cep());
