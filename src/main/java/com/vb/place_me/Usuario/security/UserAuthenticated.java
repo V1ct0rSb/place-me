@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.vb.place_me.Usuario.entity.UsuarioModel;
 
@@ -15,7 +16,8 @@ public class UserAuthenticated implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.usuario.getTipo()
+            .name()));
     }
 
     @Override

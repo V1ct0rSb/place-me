@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -25,24 +26,28 @@ public class PropriedadeController {
     private final PropriedadeService service;
 
     @PostMapping("/propriedades")
+    @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR')")
     public ResponseEntity<PropriedadeResponseDTO> criarPropriedade(PropriedadeCreateDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(this.service.criarPropriedade(dto));
     }
 
     @GetMapping("/propriedades")
+    @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR', 'HOSPEDE')")
     public ResponseEntity<List<PropriedadeResponseDTO>> listarPropriedades() {
         return ResponseEntity.ok()
             .body(this.service.listarPropriedades());
     }
 
     @GetMapping("/propriedades/{id}")
+    @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR', 'HOSPEDE')")
     public ResponseEntity<PropriedadeResponseDTO> exibirPropriedadePorId(@PathVariable Long id) {
         return ResponseEntity.ok()
             .body(this.service.exibirPropriedadePorId(id));
     }
 
     @PatchMapping("/propriedade/{id}")
+    @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR')")
     public ResponseEntity<PropriedadeResponseDTO> editarPropriedade(
         @RequestBody PropriedadeCreateDTO dto,
         @PathVariable Long id) {
@@ -51,6 +56,7 @@ public class PropriedadeController {
     }
 
     @DeleteMapping("/propriedade/{id}")
+    @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR')")
     public ResponseEntity<Void> deletarPropriedade(@PathVariable Long id) {
         this.service.deletarPropriedade(id);
         return ResponseEntity.noContent()
