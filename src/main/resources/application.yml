@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: place-me
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/placeme_db
+    username: postgres
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  private:
+    key: classpath:app.key
+  public:
+    key: classpath:app.pub
