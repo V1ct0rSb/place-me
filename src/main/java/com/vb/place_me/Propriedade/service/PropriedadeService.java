@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.vb.place_me.Propriedade.dto.PropriedadeCreateDTO;
 import com.vb.place_me.Propriedade.dto.PropriedadeResponseDTO;
+import com.vb.place_me.Propriedade.dto.ViaCepDTO;
 import com.vb.place_me.Propriedade.entity.PropriedadeModel;
 import com.vb.place_me.Propriedade.mapper.PropriedadeMapper;
 import com.vb.place_me.Propriedade.repository.PropriedadeRepository;
@@ -18,12 +19,23 @@ public class PropriedadeService {
 
     private final PropriedadeRepository repository;
     private final PropriedadeMapper mapper;
+    private final ViaCepService viaCepService;
 
-    //POST
     @Transactional
     public PropriedadeResponseDTO criarPropriedade(PropriedadeCreateDTO dto) {
+
+        ViaCepDTO dadosEndereco = this.viaCepService.buscarDadosPorCep(dto.cep());
         PropriedadeModel propriedade = mapper.toEntity(dto);
+
+        propriedade.setCep(dadosEndereco.cep());
+        propriedade.setLogradouro(dadosEndereco.logradouro());
+        propriedade.setComplemento(dadosEndereco.complemento());
+        propriedade.setBairro(dadosEndereco.bairro());
+        propriedade.setUf(dadosEndereco.uf());
+        propriedade.setEstado(dadosEndereco.localidade());
+
         var propriedadeSalvo = this.repository.save(propriedade);
+
         return this.mapper.toResponse(propriedadeSalvo);
     }
 
