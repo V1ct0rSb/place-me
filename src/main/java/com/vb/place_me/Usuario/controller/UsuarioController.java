@@ -28,7 +28,6 @@ public class UsuarioController {
     private final UsuarioService service;
 
     @PostMapping("/usuarios")
-    @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR', 'HOSPEDE')")
     public ResponseEntity<UsuarioResponseDTO> criarUsuario(@Valid @RequestBody UsuarioCreateDTO dto) {
         UsuarioResponseDTO usuarioResponseDTO = service.criarUsuario(dto);
         return ResponseEntity.status(HttpStatus.CREATED)
