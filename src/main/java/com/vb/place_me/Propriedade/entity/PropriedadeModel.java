@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vb.place_me.Propriedade.enums.TipoPropriedade;
 import com.vb.place_me.Reserva.entity.ReservaModel;
@@ -12,6 +15,7 @@ import com.vb.place_me.Usuario.entity.UsuarioModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +34,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class PropriedadeModel {
 
     @Id
@@ -61,8 +66,10 @@ public class PropriedadeModel {
     private String estado;
 
     @Column(name = "criado_em", nullable = false)
+    @CreatedDate
     private LocalDateTime criadoEm;
     @Column(name = "atualizado_em")
+    @LastModifiedDate
     private LocalDateTime atualizadoEm;
 
     @ManyToOne
