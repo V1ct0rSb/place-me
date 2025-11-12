@@ -15,8 +15,6 @@ public record UsuarioCreateDTO(
     @NotBlank(message = "A senha é obrigatória!")
     String senha,
     @NotNull(message = "O tipo do usuário é obrigatório!!")
-    TipoUsuario tipo,
-    @NotNull(message = "O status do usuário é obrigatório!!")
-    Boolean status
+    TipoUsuario tipo
 ) {
 }

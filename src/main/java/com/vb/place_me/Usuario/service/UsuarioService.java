@@ -54,9 +54,6 @@ public class UsuarioService {
         if (dto.tipo() != null) {
             usuario.setSenha(dto.senha());
         }
-        if (dto.status() != null) {
-            usuario.setTipo(dto.tipo());
-        }
 
         var usuarioSalvo = repository.save(usuario);
 

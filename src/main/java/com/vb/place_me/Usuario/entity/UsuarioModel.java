@@ -39,7 +39,7 @@ public class UsuarioModel {
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipo;
     @Column(name = "status", nullable = false)
-    private Boolean status;
+    private Boolean status = true;
 
     @OneToMany(mappedBy = "usuario")
     private List<PropriedadeModel> propriedades = new ArrayList<>();
