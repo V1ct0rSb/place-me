@@ -44,7 +44,7 @@ public class UsuarioController {
 
     @PatchMapping("/usuarios/{id}")
     @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR', 'HOSPEDE')")
-    public ResponseEntity<UsuarioResponseDTO> editarUsuario(@RequestBody UsuarioCreateDTO dto, @PathVariable Long id) {
+    public ResponseEntity<UsuarioResponseDTO> editarUsuario(@Valid @RequestBody UsuarioCreateDTO dto, @PathVariable Long id) {
         UsuarioResponseDTO usuarioResponseDTO = service.editarUsuario(dto, id);
         return ResponseEntity.ok()
             .body(usuarioResponseDTO);

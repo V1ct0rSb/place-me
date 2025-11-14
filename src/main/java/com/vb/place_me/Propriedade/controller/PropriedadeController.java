@@ -17,6 +17,7 @@ import com.vb.place_me.Propriedade.dto.PropriedadeCreateDTO;
 import com.vb.place_me.Propriedade.dto.PropriedadeResponseDTO;
 import com.vb.place_me.Propriedade.service.PropriedadeService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,7 +28,7 @@ public class PropriedadeController {
 
     @PostMapping("/propriedades")
     @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR')")
-    public ResponseEntity<PropriedadeResponseDTO> criarPropriedade(PropriedadeCreateDTO dto) {
+    public ResponseEntity<PropriedadeResponseDTO> criarPropriedade(@Valid @RequestBody PropriedadeCreateDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
             .body(this.service.criarPropriedade(dto));
     }
@@ -49,6 +50,7 @@ public class PropriedadeController {
     @PatchMapping("/propriedade/{id}")
     @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR')")
     public ResponseEntity<PropriedadeResponseDTO> editarPropriedade(
+        @Valid
         @RequestBody PropriedadeCreateDTO dto,
         @PathVariable Long id) {
         return ResponseEntity.ok()
