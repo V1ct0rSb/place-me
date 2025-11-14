@@ -1,4 +1,4 @@
-# 🚀 Place-me API
+# 🚀 PlaceMe API
 
 Backend de uma API REST desenvolvida em Java com Spring Boot para uma plataforma de gerenciamento e reserva de propriedades.
 
