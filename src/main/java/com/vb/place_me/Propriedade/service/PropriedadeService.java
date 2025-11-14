@@ -45,7 +45,6 @@ public class PropriedadeService {
         return this.mapper.toDoList(propriedades);
     }
 
-
     //GET/{ID}
     @Transactional
     public PropriedadeResponseDTO exibirPropriedadePorId(Long id) {
@@ -85,5 +84,4 @@ public class PropriedadeService {
     public void deletarPropriedade(Long id) {
         this.repository.deleteById(id);
     }
-
 }

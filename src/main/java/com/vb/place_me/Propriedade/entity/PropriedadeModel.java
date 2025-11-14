@@ -30,7 +30,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_propiedades")
+@Table(name = "tb_propriedades")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
