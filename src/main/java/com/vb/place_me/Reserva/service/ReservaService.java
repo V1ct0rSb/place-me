@@ -40,12 +40,18 @@ public class ReservaService {
         PropriedadeModel propriedade = propriedadeRepository.findById(dto.propriedadeId())
             .orElseThrow(() -> new RuntimeException("Propriedade não encontrada"));
 
+        //Verificar se a PROPRIEDADE está DISPONIVEL
+        if (propriedade.getAtivo() == false) {
+            throw new RuntimeException("Esta propriedade não está mais disponível!");
+        }
+
         ReservaModel reserva = mapper.toEntity(dto);
 
         reserva.setUsuario(usuario);
         reserva.setPropriedade(propriedade);
         reserva.setStatus(StatusReserva.PENDENTE);
 
+        //Diferenca de datas(dias) * preco
         long dias = ChronoUnit.DAYS.between(dto.dataInicio(), dto.dataFim());
         BigDecimal valorTotalReserva = propriedade.getPrecoPorNoite()
             .multiply(BigDecimal.valueOf(dias));
