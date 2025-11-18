@@ -36,7 +36,7 @@ public class UsuarioService {
         return mapper.toDtoList(usuarios);
     }
 
-    //PATH
+    //PATH{/id)
     @Transactional
     public UsuarioResponseDTO editarUsuario(UsuarioCreateDTO dto, Long id) {
         UsuarioModel usuario = repository.findById(id)

@@ -47,7 +47,7 @@ public class PropriedadeService {
 
     //GET/{ID}
     @Transactional
-    public PropriedadeResponseDTO exibirPropriedadePorId(Long id) {
+    public PropriedadeResponseDTO buscarPropriedadePorId(Long id) {
         PropriedadeModel propriedade = this.repository.findById(id)
             .orElseThrow(() -> new RuntimeException("Propriedade de id: " + id + " não encontrada!!"));
         return this.mapper.toResponse(propriedade);

@@ -44,7 +44,7 @@ public class PropriedadeController {
     @PreAuthorize("hasAnyRole('PROPRIETARIO', 'ADMINISTRADOR', 'HOSPEDE')")
     public ResponseEntity<PropriedadeResponseDTO> exibirPropriedadePorId(@PathVariable Long id) {
         return ResponseEntity.ok()
-            .body(this.service.exibirPropriedadePorId(id));
+            .body(this.service.buscarPropriedadePorId(id));
     }
 
     @PatchMapping("/propriedade/{id}")
